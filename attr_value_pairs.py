@@ -3,7 +3,6 @@ import numpy as np
 av_pairs = {}
 
 def add_to_avpair(a, v, i):
-
 	if((a, v) not in av_pairs.keys()):
 		av_pairs[(a, v)] = set()
 		av_pairs[(a, v)].add(i)
@@ -11,7 +10,7 @@ def add_to_avpair(a, v, i):
 		av_pairs[(a, v)].add(i)
 
 
-def calculate_av_pairs(attributes, table):
+def get_av_pairs(attributes, table):
 	inconsistent = set(['*', '?', '-'])
 	d_values = table[:,len(attributes)-1]
 
@@ -21,7 +20,6 @@ def calculate_av_pairs(attributes, table):
 		a = attributes[attr]
 		a_values = table[:,attr]
 		a_unique_val = list(set(a_values) - inconsistent)
-
 
 		for i in range(0, len(a_values)):
 			if(a_values[i] not in inconsistent):
@@ -38,12 +36,9 @@ def calculate_av_pairs(attributes, table):
 
 				for k in range(0, len(d_values)):
 					if(d == d_values[k]):
-						print(d_values[k])
-						val = table[k,attr]				# Replace wind attribute 0 with corresponding value
+						val = table[k,attr]				
 						if(val not in inconsistent):
-							val_set.add(val)
-			
+							val_set.add(val)			
 				for x in val_set:
 					add_to_avpair(a, x, i)		
-
-	print(av_pairs)
+	return av_pairs
