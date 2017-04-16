@@ -5,10 +5,10 @@ av_pairs = {}
 def add_to_avpair(a, v, i):
 
 	if((a, v) not in av_pairs.keys()):
-		av_pairs[(a, v)] = []
-		av_pairs[(a, v)].append(i)
+		av_pairs[(a, v)] = set()
+		av_pairs[(a, v)].add(i)
 	else:
-		av_pairs[(a, v)].append(i)
+		av_pairs[(a, v)].add(i)
 
 
 def calculate_av_pairs(attributes, table):
