@@ -1,16 +1,19 @@
 import numpy as np
 from table import createTable
-from lem2 import LEM2
-# from collections import defaultdict
+from rulesets import get_Rulesets
+import random
 
-file = 'input1.txt'
-
+file = 'input2.txt'
 table, attributes = createTable(file)
+Certain_Rulesets, Possible_Rulesets = get_Rulesets(table, attributes)
 
-x = LEM2(table, attributes)
+for cr in Certain_Rulesets:
+	print(cr)
 
-B=[0, 1 ,2]
-print(x.mlem2(B))
+print('\n')
 
+for pr in Possible_Rulesets:
+	print(pr)
 
-# RuleSets = mlem2(av_pairs, B)
+# np.random.shuffle(table)
+

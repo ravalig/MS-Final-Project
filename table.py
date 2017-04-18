@@ -28,5 +28,6 @@ def createTable(filename):
 	for i in rows:
 		table = np.append(table, [i], axis=0)
 
+
 	return table, attributes
 

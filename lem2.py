@@ -12,24 +12,26 @@ class LEM2(object):
 	def __init__(self, table, attributes):
 		self.table = table
 		self.attributes = attributes
-
-	def mlem2(self, B):
 		self.av_pairs = get_av_pairs(self.attributes, self.table)
 		self.k_sets = get_characteristic_sets(self.attributes, self.table, self.av_pairs)
 
+	def mlem2(self, B):
+	
 		G = B
 		Tou = []
 		while(len(G) != 0):
 			T = []
 			TG = self.get_TG(G)
-			while( len(T) == 0 or self.get_intersection(T).issubset(set(B)) == False):
+
+			while( len(T) == 0 or (self.get_intersection(T).issubset(set(B)) == False and len(TG) != 0)):
 				t = self.get_t(TG, G, T)
 				T.append(t)
 				G = self.av_pairs[t].intersection(set(G))
 				TG = self.get_TG(G)
+				
 				for x in T:
 					TG.remove(x)
-
+				
 			if(len(T) > 1):
 				for i in T:
 					T_copy = T[:]
@@ -60,6 +62,8 @@ class LEM2(object):
 		for av in TG:
 			relevance.append(len(self.av_pairs[av].intersection(set(G))))
 			cardinality.append(len(self.av_pairs[av]))
+		# print("Relevance  ", relevance)
+		# print("cardinality  ", cardinality)
 	
 		D_rel = defaultdict(list)
 		for i,item in enumerate(relevance):
