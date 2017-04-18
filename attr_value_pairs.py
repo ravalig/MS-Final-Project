@@ -1,6 +1,7 @@
 import numpy as np
+import collections
 
-av_pairs = {}
+av_pairs = collections.OrderedDict()
 
 def add_to_avpair(a, v, i):
 	if((a, v) not in av_pairs.keys()):
@@ -40,5 +41,6 @@ def get_av_pairs(attributes, table):
 						if(val not in inconsistent):
 							val_set.add(val)			
 				for x in val_set:
-					add_to_avpair(a, x, i)		
+					add_to_avpair(a, x, i)	
+
 	return av_pairs

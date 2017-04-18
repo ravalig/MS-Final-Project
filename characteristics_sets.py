@@ -17,6 +17,7 @@ def get_characteristic_sets(attributes, table, av_pairs):
 				else:
 					temp = av_pairs[(a,v)]
 		k_sets.append(temp)
+
 	return k_sets
 
 
