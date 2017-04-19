@@ -1,10 +1,10 @@
-< a a a d >
-[ Wind Humidity Temperature Trip ]
-low low low no
-low low high yes
-low high low yes
-low high high yes
-high low low no 
-high low high no
-high high low yes
-high high high no
+< a a a d  Table 1 >
+[ Temperature Headache Nausea Flu ]
+high ? no yes
+very_high yes yes yes
+? no no no
+high yes yes yes
+high ? yes no
+normal yes no no
+normal no yes no
+? yes ? yes

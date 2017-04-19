@@ -3,17 +3,18 @@ from table import createTable
 from rulesets import get_Rulesets
 import random
 
-file = 'input2.txt'
+file = raw_input("Enter Filename: ")
 table, attributes = createTable(file)
-Certain_Rulesets, Possible_Rulesets = get_Rulesets(table, attributes)
 
-for cr in Certain_Rulesets:
-	print(cr)
+approx = raw_input("Enter 1 for Lower Approximation or 2 for Upper Approximation: ")
 
-print('\n')
+while(approx not in ['1', '2']):
+	approx = (raw_input("Enter 1 for Lower Approximation or 2 for Upper Approximation: "))
 
-for pr in Possible_Rulesets:
-	print(pr)
+if(approx == '1'):
+	Rulesets = get_Rulesets(table, attributes, approx)
+elif(approx == '2'):
+	Rulesets = get_Rulesets(table, attributes, approx)
 
 # np.random.shuffle(table)
 

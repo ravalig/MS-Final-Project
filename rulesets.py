@@ -20,7 +20,7 @@ def getUpperApprox(k_sets, concept_cases):
 		UA.append(result)
 	return UA
 
-def get_Rulesets(table, attributes):
+def get_Rulesets(table, attributes, approx):
 
 	d = table[:,-1]	
 	d_star = defaultdict(list)
@@ -31,22 +31,28 @@ def get_Rulesets(table, attributes):
 	concepts = d_star.keys()
 	concept_cases = d_star.values()
 
-	Certain_Rulesets = []
-	Possible_Rulesets = []
-
 	x = LEM2(table, attributes)
 
-	LA = getLowerApprox(x.k_sets, concept_cases)
-	UA = getUpperApprox(x.k_sets, concept_cases)
+	Rulesets = []
 
-	for i in range(0, len(LA)):
-		result = x.mlem2(LA[i])
-		for r in result:
-			Certain_Rulesets.append([r, concepts[i]])
+	if(approx == '1'):
+		LA = getLowerApprox(x.k_sets, concept_cases)
+		for i in range(0, len(LA)):
+			result = x.mlem2(LA[i])
+			for r in result:
+				Rulesets.append([r, [(attributes[-1],concepts[i])]])
+	elif(approx == '2'):
+		UA = getUpperApprox(x.k_sets, concept_cases)
+		for i in range(0, len(UA)):
+			result = x.mlem2(UA[i])
+			for r in result:
+				Rulesets.append([r, [(attributes[-1],concepts[i])]])
 
-	for i in range(0, len(UA)):
-		result = x.mlem2(UA[i])
-		for r in result:
-			Possible_Rulesets.append([r, concepts[i]])
+	for rule in Rulesets:
+		print(rule)
+		G = d_star[rule[1][0][1]]
+		strength = len(x.get_intersection(rule[0]).intersection(G))
+		specificity = len(rule[0])
+		print(specificity)
 
-	return Certain_Rulesets, Possible_Rulesets
+	return Rulesets
