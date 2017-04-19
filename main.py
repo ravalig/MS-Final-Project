@@ -12,9 +12,10 @@ while(approx not in ['1', '2']):
 	approx = (raw_input("Enter 1 for Lower Approximation or 2 for Upper Approximation: "))
 
 if(approx == '1'):
-	Rulesets = get_Rulesets(table, attributes, approx)
+	Rulesets, Factors, support = get_Rulesets(table, attributes, approx)
 elif(approx == '2'):
-	Rulesets = get_Rulesets(table, attributes, approx)
+	Rulesets, Factors, support = get_Rulesets(table, attributes, approx)
+
 
 # np.random.shuffle(table)
 

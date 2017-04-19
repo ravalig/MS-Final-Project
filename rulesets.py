@@ -48,11 +48,19 @@ def get_Rulesets(table, attributes, approx):
 			for r in result:
 				Rulesets.append([r, [(attributes[-1],concepts[i])]])
 
+	Factors = []
+	support = {}
 	for rule in Rulesets:
-		print(rule)
 		G = d_star[rule[1][0][1]]
 		strength = len(x.get_intersection(rule[0]).intersection(G))
 		specificity = len(rule[0])
-		print(specificity)
+		leftHand_av = len(x.get_intersection(rule[0]))
+		Factors.append({'strength':strength, 'specificity':specificity, 'leftHand_av':leftHand_av})
 
-	return Rulesets
+		if(rule[-1][0] not in support.keys()):
+			support[rule[-1][0]] = strength * specificity
+		else:
+			support[rule[-1][0]] = support[rule[-1][0]] + (strength * specificity)
+
+	return Rulesets, Factors, support
+	
