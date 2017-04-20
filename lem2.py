@@ -62,9 +62,7 @@ class LEM2(object):
 		for av in TG:
 			relevance.append(len(self.av_pairs[av].intersection(set(G))))
 			cardinality.append(len(self.av_pairs[av]))
-		# print("Relevance  ", relevance)
-		# print("cardinality  ", cardinality)
-	
+
 		D_rel = defaultdict(list)
 		for i,item in enumerate(relevance):
 			D_rel[item].append(i)

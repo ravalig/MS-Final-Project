@@ -1,9 +1,7 @@
 import numpy as np
 import collections
 
-av_pairs = collections.OrderedDict()
-
-def add_to_avpair(a, v, i):
+def add_to_avpair(a, v, i, av_pairs):
 	if((a, v) not in av_pairs.keys()):
 		av_pairs[(a, v)] = set()
 		av_pairs[(a, v)].add(i)
@@ -12,6 +10,13 @@ def add_to_avpair(a, v, i):
 
 
 def get_av_pairs(attributes, table):
+	# print("In av_pairs method ") 
+	# print(table)
+	# print('\n')
+	av_pairs = collections.OrderedDict()
+	# print("Before getavpairs ") 
+	# print(av_pairs)
+	# print('\n')
 	inconsistent = set(['*', '?', '-'])
 	d_values = table[:,len(attributes)-1]
 
@@ -24,12 +29,12 @@ def get_av_pairs(attributes, table):
 
 		for i in range(0, len(a_values)):
 			if(a_values[i] not in inconsistent):
-				add_to_avpair(a, a_values[i], i)
+				add_to_avpair(a, a_values[i], i, av_pairs)
 			elif(a_values[i] == '?'):
 				pass
 			elif(a_values[i] == '*'):
 				for j in range(0, len(a_unique_val)):
-					add_to_avpair(a, a_unique_val[j], i)
+					add_to_avpair(a, a_unique_val[j], i, av_pairs)
 			elif(a_values[i] == '-'):
 
 				d = table[i,len(attributes)-1]
@@ -41,6 +46,8 @@ def get_av_pairs(attributes, table):
 						if(val not in inconsistent):
 							val_set.add(val)			
 				for x in val_set:
-					add_to_avpair(a, x, i)	
-
+					add_to_avpair(a, x, i, av_pairs)	
+	# print("After getavpairs ") 
+	# print(av_pairs)
+	# print('\n')
 	return av_pairs

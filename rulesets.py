@@ -1,6 +1,7 @@
 from collections import defaultdict
 from lem2 import LEM2
 
+
 def getLowerApprox(k_sets, concept_cases):
 	LA = []
 	for X in concept_cases:
@@ -61,6 +62,4 @@ def get_Rulesets(table, attributes, approx):
 			support[rule[-1][0]] = strength * specificity
 		else:
 			support[rule[-1][0]] = support[rule[-1][0]] + (strength * specificity)
-
 	return Rulesets, Factors, support
-	

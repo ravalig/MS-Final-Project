@@ -1,0 +1,8 @@
+< a a a d >
+[ Wind Humidity Temperature Trip  ]
+high yes yes yes  
+* yes * yes  
+normal yes no no  
+* no no no  
+very_high yes yes yes  
+high * no yes   
